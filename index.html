@@ -1,1 +1,526 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub.Io - Huỳnh Dương</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        /* Variables */
+        :root {
+            --primary-color: #8B5CF6;
+            --secondary-color: #EC4899;
+            --bg-dark: #1F2937;
+            --text-light: #F3F4F6;
+            --text-dark: #1F2937;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Main Styles */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4C1D95 0%, #5B21B6 50%, #4338CA 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Section */
+        .profile-header {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            padding: 4px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: transform 0.3s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-title {
+            font-size: 1.5rem;
+            color: #E5E7EB;
+            margin-bottom: 1rem;
+        }
+
+        .profile-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: scale(1.2);
+            color: var(--primary-color);
+        }
+
+        .download-cv {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .download-cv:hover {
+            background: #7C3AED;
+            transform: scale(1.05);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.03);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #E5E7EB;
+        }
+
+        .stat-label {
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            color: #E5E7EB;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #A78BFA;
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            width: 0;
+            transition: width 1s ease;
+        }
+      /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #E5E7EB;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            color: #9CA3AF;
+            margin-bottom: 1rem;
+        }
+
+        .project-results {
+            list-style-type: none;
+        }
+
+        .project-results li {
+            margin-bottom: 0.5rem;
+            color: #E5E7EB;
+        }
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #E5E7EB;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #E5E7EB;
+        }
+
+        .testimonial-position {
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .profile-name {
+                font-size: 2rem;
+            }
+
+            .profile-title {
+                font-size: 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Header -->
+        <header class="profile-header">
+            <img src="https://github.com/ghost.png" alt="Profile Avatar" class="profile-avatar">
+            <h1 class="profile-name">Nguyễn Văn An</h1>
+            <p class="profile-title">Chuyên Viên Marketing Số</p>
+            
+            <div class="profile-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>TP. Hồ Chí Minh</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+84 123 456 789</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>nguyenvanan@email.com</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>15/08/1995</span>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <button class="download-cv">
+                <i class="fas fa-download"></i>
+                Tải CV
+            </button>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-award stat-icon"></i>
+                <div class="stat-value">15+</div>
+                <div class="stat-label">Giải thưởng</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-book stat-icon"></i>
+                <div class="stat-value">45+</div>
+                <div class="stat-label">Dự án</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users stat-icon"></i>
+                <div class="stat-value">200+</div>
+                <div class="stat-label">Khách hàng</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star stat-icon"></i>
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Độ hài lòng</div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="skills">Kỹ Năng</button>
+            <button class="tab-btn" data-tab="projects">Dự Án</button>
+            <button class="tab-btn" data-tab="testimonials">Đánh Giá</button>
+        </div>
+
+        <!-- Tab Contents -->
+        <div class="tab-content active" id="skills">
+            <div class="skills-grid">
+                <!-- Marketing Skills -->
+                <div class="skill-category">
+                    <h3>Marketing Số</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Chiến lược nội dung</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="95"></div>
+                        </div>
+                    </div>
+                    <!-- More skills... -->
+                </div>
+                <!-- More categories... -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="projects">
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Chiến dịch XYZ</h3>
+                    <p class="project-desc">Tăng 300% tương tác trên mạng xã hội</p>
+                    <ul class="project-results">
+                        <li>Tăng doanh thu 150%</li>
+                        <li>Đạt 1M followers</li>
+                        <li>ROI 300%</li>
+                    </ul>
+                </div>
+                <!-- More projects... -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="testimonials">
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Anh An đã giúp công ty chúng tôi tăng 200% lượng truy cập website và tăng 150% doanh số bán hàng online chỉ trong 6 tháng."
+                    </p>
+                    <div class="testimonial-author">Trần Thị Bình</div>
+                    <div class="testimonial-position">Giám đốc kinh doanh, Tech Solutions</div>
+                </div>
+                <!-- More testimonials... -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Animate skill bars on load
+        function animateSkills() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const progress = bar.dataset.progress;
+                bar.style.width = `${progress}%`;
+            });
+        }
+
+        // Animate stats on scroll
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-value');
+            stats.forEach(stat => {
+                const value = stat.innerText;
+                if (value.includes('+')) {
+                    const num = parseInt(value);
+                    let count = 0;
+                    const duration = 2000; // 2 seconds
+                    const interval = duration / num;
+                    const counter = setInterval(() => {
+                        count++;
+                        stat.innerText = count + '+';
+                        if (count === num) clearInterval(counter);
+                    }, interval);
+                }
+            });
+        }
+
+        // Run animations
+        document.addEventListener('DOMContentLoaded', () => {
+            animateSkills();
+            animateStats();
+        });
+    </script>
+</body>
+</html>
